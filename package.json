@@ -1,0 +1,15 @@
+{
+  "name": "real-state-dhaka",
+  "version": "1.0.0",
+  "description": "A Real State Portal",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jamatul Islam",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.4.0"
+  }
+}
