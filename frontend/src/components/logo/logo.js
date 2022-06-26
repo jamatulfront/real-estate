@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import HomeIcon from "../.././../assets/icons/home";
+import HomeIcon from "../../assets/icons/home";
 
 const Pan = styled.span`
   display: flex;

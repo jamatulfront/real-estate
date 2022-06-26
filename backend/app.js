@@ -1,9 +1,12 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 
 const userRoutes = require("./routes/userRoutes");
 const app = express();
+
+app.use("/images", express.static(path.join(__dirname, "/images")));
 
 // Middlewares
 app.use(cors({ origin: "http://localhost:3000" }));

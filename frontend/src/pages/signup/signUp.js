@@ -11,8 +11,8 @@ import {
 } from "./styledSignUp";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import FormInput from "../../components/global/input/input";
-import Logo from "../../components/global/logo/logo";
+import FormInput from "../../components/input/input";
+import Logo from "../../components/logo/logo";
 import useInput from "../../hooks/useInput";
 import { signUpUser } from "../../contexts/user/userActions";
 import { useUser } from "../../contexts/user/userContext";

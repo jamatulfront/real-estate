@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
   const initialState = {
     user: localStorage.getItem("real_state-user")
       ? JSON.parse(localStorage.getItem("real_state-user"))
-      : {},
+      : null,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
