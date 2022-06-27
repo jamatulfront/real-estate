@@ -9,7 +9,9 @@ const UserReducer = (state, action) => {
     case "SIGN_IN":
       return { ...state, user: action.payload };
     case "SIGN_OUT":
-      return {};
+      return { ...state, user: null };
+    case "UPDATE_USER":
+      return { ...state, user: action.payload };
     default:
       return state;
   }

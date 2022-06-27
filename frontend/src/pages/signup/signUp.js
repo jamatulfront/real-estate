@@ -48,7 +48,7 @@ export default function SignUp() {
           localStorage.setItem("real_state-user", JSON.stringify(user));
           localStorage.setItem("real_state-token", token);
           // Dispatch an action
-          dispatch({ type: "SIGN_UP", user });
+          dispatch({ type: "SIGN_UP", payload: user });
           setError("");
           setTimeout(() => {
             setLoading(false);

@@ -6,13 +6,13 @@ import { useUser } from "../../contexts/user/userContext";
 const SignInButton = styled(Link)`
   text-decoration: none;
   color: ${(props) => props.theme.color.grayDark};
-  padding: 1rem;
+  padding: 1rem 2rem;
   font-weight: bold;
-  background-color: ${(props) => props.theme.color.white};
+  background-color: ${(props) => props.theme.color.whiteDark};
   border-radius: 0.5rem;
   transition: all 0.3s ease-in;
   &:hover {
-    background-color: ${(props) => props.theme.color.whiteDark};
+    background-color: ${(props) => props.theme.color.gray};
   }
 `;
 const JoinButton = styled(Link)`
@@ -22,7 +22,7 @@ const JoinButton = styled(Link)`
   background-color: ${(props) => props.theme.color.brand};
   border-radius: 1rem;
   font-weight: bold;
-  margin-left: 0.2rem;
+  margin-left: 1rem;
   transition: all 0.3s ease-in;
   &:hover {
     background-color: ${(props) => props.theme.color.text.warning};
@@ -30,8 +30,8 @@ const JoinButton = styled(Link)`
 `;
 const Wrapper = styled.div``;
 const UserAvatar = styled(Link)`
-  height: 5rem;
-  width: 5rem;
+  height: 3.6rem;
+  width: 3.6rem;
   border-radius: 50%;
   background-color: ${(props) => props.theme.color.gray};
   display: flex;
@@ -39,6 +39,9 @@ const UserAvatar = styled(Link)`
   justify-content: center;
   img {
     width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
   }
 `;
 export default function UserMenu() {

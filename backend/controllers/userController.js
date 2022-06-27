@@ -7,7 +7,7 @@ const factory = require("./allFactory");
 // Create a multer storage in the images/users path
 const multerStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "images/users");
+    cb(null, "backend/images/users");
   },
   filename: (req, file, cb) => {
     const ext = file.mimetype.split("/")[1];
@@ -36,7 +36,7 @@ exports.uploadUserPhoto = upload.single("photo");
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
   Object.keys(obj).forEach((el) => {
-    if (allowedFields.includes(el)) newObj[el] = obj[el];
+    if (!allowedFields.includes(el)) newObj[el] = obj[el];
   });
   return newObj;
 };
@@ -48,8 +48,8 @@ exports.getMe = (req, res, next) => {
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   // 1) Filtered out unwanted fields names that are not allowed to be updated
-  const filteredBody = filterObj(req.body, "name", "email");
-  if (req.file) filteredBody.photo = req.file.filename;
+  const filteredBody = filterObj(req.body, "email");
+  if (req.file) filteredBody.photo = "/images/users/" + req.file.filename;
 
   // 2) Update user document
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {

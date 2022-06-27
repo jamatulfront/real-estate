@@ -14,7 +14,7 @@ import styled from "styled-components";
 import FormInput from "../../components/input/input";
 import Logo from "../../components/logo/logo";
 import useInput from "../../hooks/useInput";
-import { signUpUser } from "../../contexts/user/userActions";
+import { signInUser } from "../../contexts/user/userActions";
 import { useUser } from "../../contexts/user/userContext";
 import BounceLoader from "react-spinners/BounceLoader";
 
@@ -40,7 +40,7 @@ export default function SignIn() {
       // create userObj
       let userObj = { email: email.value, password: password.value };
       try {
-        let response = await signUpUser(userObj);
+        let response = await signInUser(userObj);
         if (response.status === "success") {
           let { user } = response.data;
           let token = response.token;
@@ -48,7 +48,7 @@ export default function SignIn() {
           localStorage.setItem("real_state-user", JSON.stringify(user));
           localStorage.setItem("real_state-token", token);
           // Dispatch an action
-          dispatch({ type: "SIGN_IN", user });
+          dispatch({ type: "SIGN_IN", payload: user });
           setError("");
           setTimeout(() => {
             setLoading(false);
@@ -85,7 +85,9 @@ export default function SignIn() {
             placeholder="Passwrod"
             {...password}
           />
-          <Button onClick={submitForm}>Sign in</Button>
+          <Button style={{ marginBottom: "2rem" }} onClick={submitForm}>
+            Sign in
+          </Button>
           <BounceLoader color={"#0078bd"} loading={loading} size={40} />
           {error && <ErrorMessage>{error}</ErrorMessage>}
         </Form>

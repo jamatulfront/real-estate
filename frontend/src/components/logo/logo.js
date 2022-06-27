@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import HomeIcon from "../../assets/icons/home";
 
@@ -9,7 +10,8 @@ const Pan = styled.span`
 `;
 const Text = styled.h3`
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 700;
+  font-family: serif;
   color: ${(props) => props.theme.color.grayDark};
   margin: 0;
 `;
@@ -23,14 +25,22 @@ const Circle = styled.span`
   justify-content: center;
   margin-right: 0.5rem;
 `;
+const HomeLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default function Logo() {
   return (
     <Pan>
-      <Circle>
-        <HomeIcon height="2rem" width="2rem" />
-      </Circle>
-      <Text>realstateDhaka.com</Text>
+      <HomeLink to="/">
+        <Circle>
+          <HomeIcon height="2rem" width="2rem" />
+        </Circle>
+        <Text>realstateDhaka.com</Text>
+      </HomeLink>
     </Pan>
   );
 }

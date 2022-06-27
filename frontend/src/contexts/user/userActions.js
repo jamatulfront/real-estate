@@ -15,7 +15,17 @@ export const signUpUser = async (user) => {
   return response.data;
 };
 
-export const signOutUser = async (user) => {
-  const response = await userInstance.post(`/signout`);
+export const signOutUser = async () => {
+  const response = await userInstance.get(`/signout`);
+  return response.data;
+};
+
+export const updateUser = async (user) => {
+  const response = await userInstance.patch(`/updateMe`, user, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("real_state-token")}`,
+    },
+  });
   return response.data;
 };

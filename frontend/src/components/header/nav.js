@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useUser } from "../../contexts/user/userContext";
 
 const Container = styled.div``;
 const List = styled.ul``;
@@ -20,6 +21,7 @@ const ListLink = styled(Link)`
 `;
 
 export default function Nav() {
+  const { user } = useUser();
   return (
     <Container>
       <List>
@@ -27,6 +29,9 @@ export default function Nav() {
           <ListLink to="/buy">Buy</ListLink>
           <ListLink to="/rent">Rent</ListLink>
           <ListLink to="/blogs">Blogs</ListLink>
+          {user?.role === "agent" && (
+            <ListLink to="/addProperty">Add a Property</ListLink>
+          )}
         </ListItem>
       </List>
     </Container>
