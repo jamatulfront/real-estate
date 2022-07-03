@@ -7,6 +7,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --green: rgb(28, 164, 110);
+  --blur: rgba(0, 0, 0, 0.523);
+  --gray: #959199;
+  --grayDark: #3d3b40;
+}
 html {
   font-size: 62.5%;
 }

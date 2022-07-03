@@ -11,12 +11,16 @@ export const Pan = styled.div`
   @media (max-width: 1000px) {
     width: ${(props) => (props.tight ? "70%" : "90%")};
   }
+  @media (max-width: 500px) {
+    width: ${(props) => (props.tight ? "100%" : "90%")};
+  }
 `;
 export const Frame = styled.div`
   border-top: 1px solid ${(props) => props.theme.color.whiteDark};
   padding: 0rem 2rem;
   width: 100%;
   margin: auto;
+  margin-top: 8rem;
   text-align: center;
 `;
 export const Heading = styled.h1`
@@ -26,6 +30,9 @@ export const Heading = styled.h1`
   text-align: center;
   margin-bottom: 1rem;
   margin-top: 1rem;
+  @media (max-width: 500px) {
+    font-size: 2.4rem;
+  }
 `;
 export const Item = styled.div`
   margin-bottom: 1rem;
@@ -63,4 +70,8 @@ export const Button = styled(Link)`
   border: none;
   color: ${(props) => props.theme.color.grayDark};
   cursor: pointer;
+  @media (max-width: 500px) {
+    font-size: 1.4rem;
+    padding: 0.8rem 1.6rem;
+  }
 `;

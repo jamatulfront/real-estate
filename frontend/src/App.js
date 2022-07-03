@@ -6,6 +6,9 @@ import SignUp from "./pages/signup/signUp";
 import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
 import LoggedInRoutes from "./routes/LoggedInRoutes";
 import ProfileUpdate from "./pages/profileUpdate/profileUpdate";
+import AddProperty from "./pages/addProperty/addProperty";
+import NewHomes from "./pages/newHomes/newHomes";
+import PropertyDetails from "./pages/propertyDetails/propertyDetails";
 function App() {
   return (
     <>
@@ -17,9 +20,16 @@ function App() {
         <Route element={<LoggedInRoutes />}>
           <Route path="profile" element={<Profile />} exact />
           <Route path="profile/update" element={<ProfileUpdate />} exact />
+          <Route path="/addProperty" element={<AddProperty />} exact />
         </Route>
 
         <Route path="/" element={<Home />} exact />
+        <Route path="/newHomes" element={<NewHomes />} exact />
+        <Route
+          path="/property/:propertyId"
+          element={<PropertyDetails />}
+          exact
+        />
       </Routes>
     </>
   );

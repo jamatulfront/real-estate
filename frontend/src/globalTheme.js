@@ -14,7 +14,7 @@ export default function GlobalTheme({ children }) {
         secondary: "#726E75",
 
         info: "#00639E",
-        sucess: "#137044",
+        success: "#137044",
         warning: "#A8420D",
       },
     },

@@ -37,9 +37,7 @@ export default function Profile() {
   };
   return (
     <Container>
-      <Pan>
-        <Header />
-      </Pan>
+      <Header />
       <Frame>
         <Heading>Account Overview</Heading>
         <Pan tight>

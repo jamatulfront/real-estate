@@ -18,6 +18,7 @@ export const Frame = styled.div`
   width: 100%;
   margin: auto;
   text-align: center;
+  margin-top: 8rem;
 `;
 export const Heading = styled.h1`
   font-size: 2.8rem;
@@ -27,6 +28,9 @@ export const Heading = styled.h1`
   font-weight: 500;
   margin: 0;
   margin-top: 0.5rem;
+  @media (max-width: 500px) {
+    font-size: 2.4rem;
+  }
 `;
 export const AgentWrapper = styled.div`
   width: 30%;
@@ -40,6 +44,9 @@ export const AgentWrapper = styled.div`
   margin: auto;
   margin-top: 2rem;
   cursor: pointer;
+  @media (max-width: 500px) {
+    width: 45%;
+  }
 `;
 export const Triangle = styled.div`
   border-right: 27px solid #eff0f4;
@@ -58,9 +65,12 @@ export const Triangle = styled.div`
   }
 `;
 export const AgentLabel = styled.h3`
-  font-size: 1, 8rem;
+  font-size: 1.8rem;
   color: ${(props) =>
     props.clicked ? "#ffffff" : "props.theme.color.grayDark"};
+  @media (max-width: 500px) {
+    font-size: 1.6rem;
+  }
 `;
 export const AgentAvatar = styled.img`
   width: 10rem;
@@ -72,6 +82,9 @@ export const SubHeading = styled.h2`
   font-weight: 400;
   color: ${(props) => props.theme.color.grayDark};
   margin: 1.5rem 0;
+  @media (max-width: 500px) {
+    font-size: 2rem;
+  }
 `;
 export const Text = styled.p`
   color: ${(props) => props.theme.color.gray};
@@ -83,6 +96,10 @@ export const Form = styled.form`
   width: 80%;
   margin: auto;
   margin-top: 2.5rem;
+  @media (max-width: 500px) {
+    width: 90%;
+  }
+  z-index: -10000;
 `;
 export const Button = styled.button`
   width: 100%;
@@ -113,6 +130,7 @@ export const Avatar = styled.img`
   justify-content: center;
   transform: translateY(1.3rem) translateX(-1rem);
   border: 0.3rem solid ${(props) => props.theme.color.brand};
+  z-index: -10000;
 `;
 export const Label = styled.label`
   display: flex;
@@ -123,6 +141,7 @@ export const Label = styled.label`
   height: 8rem;
   font-weight: bold;
   transform: translateY(-1rem);
+  z-index: -10000;
 `;
 export const FileInput = styled.input`
   display: none;

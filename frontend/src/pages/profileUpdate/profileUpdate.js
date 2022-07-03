@@ -114,12 +114,12 @@ export default function ProfileUpdate() {
   };
   return (
     <Container>
-      <Pan>
-        <Header />
-      </Pan>
+      <Header />
+
       <Frame>
         <Pan tight>
           <Heading>Update Your Profile</Heading>
+
           <AgentWrapper
             clicked={agent ? true : false}
             onClick={() => {
@@ -128,7 +128,9 @@ export default function ProfileUpdate() {
           >
             <Triangle>{agent && <img alt="agent" src={tickUrl} />}</Triangle>
             <AgentAvatar src={avatarUrl} />
-            <AgentLabel clicked={agent ? true : false}>I'm an agent</AgentLabel>
+            <AgentLabel clicked={agent ? true : false}>
+              {agent ? "I'm an agent" : "General User"}
+            </AgentLabel>
           </AgentWrapper>
           <SubHeading>Your Details</SubHeading>
           <Text>
