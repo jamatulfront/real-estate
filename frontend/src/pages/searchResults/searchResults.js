@@ -14,6 +14,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import { useProperty } from "../../contexts/properties/propertiesContext";
 import notFoundImgUrl from "../../assets/images/notfound.jpg";
 import Footer from "../../components/footer/footer";
+import PropertyFilter from "../../components/propertyFilter/propertyFilter";
 export default function SearchResults() {
   let [properties, setProperties] = useState([]);
   let [place, setPlace] = useState("");
@@ -28,6 +29,7 @@ export default function SearchResults() {
   return (
     <Container>
       <Header />
+      <PropertyFilter />
       {loading && (
         <Pan>
           <MoonLoader loading={loading} color="red" size={40} />

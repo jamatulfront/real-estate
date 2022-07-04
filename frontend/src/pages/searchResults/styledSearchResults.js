@@ -11,8 +11,6 @@ export const Pan = styled.div`
 `;
 export const Frame = styled.div`
   margin-top: 8rem;
-  border-top: 1px solid ${(props) => props.theme.color.whiteDark};
-  padding: 1rem 2rem;
 `;
 export const Heading = styled.h1`
   font-size: 2.8rem;

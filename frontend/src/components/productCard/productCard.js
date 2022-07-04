@@ -72,7 +72,12 @@ export default function ProductCard({ product }) {
       <Image src={url + product.images[0]} />
       <Heading>{product.name}</Heading>
       <Text>{product.location.address}</Text>
-      <Price>{product.price} Laq Tk</Price>
+      <Price>
+        {new Intl.NumberFormat("hi-IN", {
+          style: "currency",
+          currency: "BDT",
+        }).format(product.price)}{" "}
+      </Price>
       <Bottom>
         <Box>
           <Icon src={bedUrl} alt="bed-icon"></Icon>

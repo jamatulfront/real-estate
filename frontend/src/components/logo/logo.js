@@ -46,7 +46,7 @@ export default function Logo() {
         <Circle>
           <HomeIcon height="1.4rem" width="1.4rem" />
         </Circle>
-        <Text>realstateDhaka.com</Text>
+        <Text>realstateBd.com</Text>
       </HomeLink>
     </Pan>
   );

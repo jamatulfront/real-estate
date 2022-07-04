@@ -12,6 +12,7 @@ import {
 import MoonLoader from "react-spinners/MoonLoader";
 import { ErrorMessage } from "../signin/styledSignIn";
 import Footer from "../../components/footer/footer";
+import PropertyFilter from "../../components/propertyFilter/propertyFilter";
 export default function NewHomes({ title = "Fresh Homes For You -" }) {
   let [properties, setProperties] = useState([]);
   let [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ export default function NewHomes({ title = "Fresh Homes For You -" }) {
   return (
     <Container>
       <Header />
+      <PropertyFilter />
       {(error || loading) && (
         <Pan>
           <MoonLoader loading={loading} color="red" size={40} />

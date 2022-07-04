@@ -315,7 +315,10 @@ export default function PropertyDetails() {
                     <Text>{property.type}</Text>
                   </SmallBoxWrapper>
                   <HeadingSecondary style={{ marginTop: "5rem" }}>
-                    {property.price} tk
+                    {new Intl.NumberFormat("hi-IN", {
+                      style: "currency",
+                      currency: "BDT",
+                    }).format(property.price)}{" "}
                   </HeadingSecondary>
                 </TopLeft>
                 <TopRight>
