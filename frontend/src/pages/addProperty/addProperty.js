@@ -34,6 +34,7 @@ import {
 import { ErrorMessage } from "../../pages/signin/styledSignIn";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { Link } from "react-router-dom";
+import Footer from "../../components/footer/footer";
 
 export default function AddProperty() {
   const [error, setError] = useState("");
@@ -363,7 +364,7 @@ export default function AddProperty() {
           <Button onClick={submitForm}>Submit Your Property</Button>
           <Center>
             {" "}
-            <PropagateLoader color={"#0078bd"} loading={loading} size={40} />
+            <PropagateLoader color={"#0078bd"} loading={loading} size={30} />
           </Center>
 
           {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -376,6 +377,7 @@ export default function AddProperty() {
           )}
         </Form>
       </Wrapper>
+      <Footer />
     </Container>
   );
 }

@@ -38,6 +38,7 @@ export default function Nav() {
             <ListItem>
               <ListLink to="/buy">Buy</ListLink>
               <ListLink to="/rent">Rent</ListLink>
+              <ListLink to="/explores">Explores </ListLink>
               <ListLink to="/newHomes">New Homes</ListLink>
               <ListLink to="/blogs">Blogs</ListLink>
               {user?.role === "agent" && (

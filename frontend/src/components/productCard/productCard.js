@@ -2,16 +2,15 @@ import styled from "styled-components";
 import bedUrl from "../../assets/icons/bed.png";
 import squareUrl from "../../assets/icons/square.png";
 import { useNavigate } from "react-router-dom";
-
-let backendUrl = "http://localhost:8000";
+import { url } from "../../config/url";
 const Container = styled.div`
   width: 100%;
   cursor: pointer;
   border: 2px solid transparent;
   border-radius: 1rem;
-  padding: 0.5rem;
+  padding: 2rem;
   &:hover {
-    border: 2px solid var(--green);
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2);
   }
   position: relative;
 `;
@@ -70,7 +69,7 @@ export default function ProductCard({ product }) {
   return (
     <Container onClick={() => navigateTo("/property/" + product._id)}>
       <RedCircle>{product.forSale ? "For Sale" : "For Rent"}</RedCircle>
-      <Image src={backendUrl + product.images[0]} />
+      <Image src={url + product.images[0]} />
       <Heading>{product.name}</Heading>
       <Text>{product.location.address}</Text>
       <Price>{product.price} Laq Tk</Price>

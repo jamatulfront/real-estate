@@ -12,6 +12,8 @@ import { PropertyMap } from "../../components/propertyMap/propertyMap";
 import ImageGallery from "../../components/imageGallery/imageGallery";
 import AgentCard from "../../components/agentCard/agentCard";
 import featureIconUrl from "../../assets/icons/feature.png";
+import Footer from "../../components/footer/footer";
+import { useUser } from "../../contexts/user/userContext";
 
 const Container = styled.div`
   background: #f4f4f4;
@@ -247,6 +249,14 @@ const FeatureIcon = styled.img`
   width: 3rem;
   height: 3rem;
 `;
+
+const EditButton = styled.button`
+  position: absolute;
+  top: 10rem;
+  right: 14.3rem;
+  cursor: pointer;
+  border: none;
+`;
 export default function PropertyDetails() {
   let { propertyId } = useParams();
   const [loading, setLoading] = useState(true);
@@ -254,7 +264,9 @@ export default function PropertyDetails() {
   const [property, setProperty] = useState(null);
   const [showImgPreview, setShowImgPreview] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
+  const [canEdit, setCanEdit] = useState(false);
 
+  let { user } = useUser();
   useEffect(() => {
     async function fetchProperty() {
       try {
@@ -262,6 +274,10 @@ export default function PropertyDetails() {
         setProperty(data.data.data);
         setLoading(false);
         setError("");
+        console.log(user._id, data.data.data.owner._id);
+        if (user._id === data.data.data.owner._id) {
+          setCanEdit(true);
+        }
       } catch (error) {
         setLoading(false);
         setError("Something went wrong on loading property. Please try again.");
@@ -273,6 +289,7 @@ export default function PropertyDetails() {
   return (
     <Container>
       <Header />
+      {canEdit && <EditButton>Edit</EditButton>}
       {(loading || error) && (
         <Pan>
           <MoonLoader loading={loading} size={40} color="red" />
@@ -364,7 +381,7 @@ export default function PropertyDetails() {
             <MapWrapper>
               <PropertyMap
                 height={400}
-                zoom={18}
+                zoom={16}
                 long={property.location.coordinates[0]}
                 lat={property.location.coordinates[1]}
               />
@@ -397,6 +414,7 @@ export default function PropertyDetails() {
           )}
         </>
       )}
+      <Footer />
     </Container>
   );
 }

@@ -11,7 +11,8 @@ import {
 } from "./styledNewHomes";
 import MoonLoader from "react-spinners/MoonLoader";
 import { ErrorMessage } from "../signin/styledSignIn";
-export default function NewHomes() {
+import Footer from "../../components/footer/footer";
+export default function NewHomes({ title = "Fresh Homes For You -" }) {
   let [properties, setProperties] = useState([]);
   let [loading, setLoading] = useState(true);
   let [error, setError] = useState("");
@@ -40,7 +41,7 @@ export default function NewHomes() {
       )}
       {properties.length > 0 && (
         <Frame>
-          <Heading>Fresh Homes Ready For You !</Heading>
+          <Heading>{title}</Heading>
           <ProductsWrapper>
             {properties.map((p, i) => (
               <ProductCard key={i} product={p} />
@@ -48,6 +49,7 @@ export default function NewHomes() {
           </ProductsWrapper>
         </Frame>
       )}
+      <Footer />
     </Container>
   );
 }

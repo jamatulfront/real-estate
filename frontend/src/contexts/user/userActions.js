@@ -1,8 +1,9 @@
 import axios from "axios";
-const url = "http://localhost:8000/api/v1/users";
+import { url } from "../../config/url";
+const backendUrl = url + "/api/v1/users";
 
 const userInstance = axios.create({
-  baseURL: url,
+  baseURL: backendUrl,
 });
 
 export const signInUser = async (user) => {

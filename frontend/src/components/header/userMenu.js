@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { url } from "../../config/url";
 import { useUser } from "../../contexts/user/userContext";
 
 const SignInButton = styled(Link)`
@@ -14,6 +15,10 @@ const SignInButton = styled(Link)`
   &:hover {
     background-color: ${(props) => props.theme.color.gray};
   }
+  @media (max-width: 500px) {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+  }
 `;
 const JoinButton = styled(Link)`
   text-decoration: none;
@@ -26,6 +31,10 @@ const JoinButton = styled(Link)`
   transition: all 0.3s ease-in;
   &:hover {
     background-color: ${(props) => props.theme.color.text.warning};
+  }
+  @media (max-width: 500px) {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
   }
 `;
 const Wrapper = styled.div``;
@@ -50,7 +59,7 @@ export default function UserMenu() {
     <Wrapper>
       {user ? (
         <UserAvatar to="/profile">
-          <img src={"http://localhost:8000" + user?.photo} alt="user-avatar" />
+          <img src={url + user?.photo} alt="user-avatar" />
         </UserAvatar>
       ) : (
         <>

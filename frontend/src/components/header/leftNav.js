@@ -88,6 +88,9 @@ export default function LeftNav() {
             <LeftMenuLink to="/rent">Rent</LeftMenuLink>
           </LeftMenuItem>
           <LeftMenuItem>
+            <LeftMenuLink to="/expolores">Explores</LeftMenuLink>
+          </LeftMenuItem>
+          <LeftMenuItem>
             <LeftMenuLink to="/newHomes">New Homes</LeftMenuLink>
           </LeftMenuItem>
           <LeftMenuItem>

@@ -10,18 +10,15 @@ export const Pan = styled.div`
   height: 90vh;
 `;
 export const Frame = styled.div`
-  margin-top: 10rem;
-
+  margin-top: 8rem;
+  border-top: 1px solid ${(props) => props.theme.color.whiteDark};
   padding: 1rem 2rem;
 `;
 export const Heading = styled.h1`
-  border-bottom: 1px solid ${(props) => props.theme.color.whiteDark};
   font-size: 2.8rem;
-  padding-bottom: 1rem;
-  padding-left: 13rem;
   letter-spacing: 1px;
   color: ${(props) => props.theme.color.grayDark};
-  text-align: left;
+  text-align: center;
   font-weight: 500;
   margin: 0;
   margin-top: 0.5rem;
@@ -51,4 +48,8 @@ export const ProductsWrapper = styled.div`
     padding: 2rem 1rem;
     justify-content: center;
   }
+`;
+
+export const NotFoundImage = styled.img`
+  height: 30rem;
 `;

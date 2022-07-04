@@ -8,6 +8,10 @@ export const Container = styled.div`
   @media (max-width: 768px) {
     width: 80%;
   }
+  @media (max-width: 400px) {
+    width: 95%;
+    margin-bottom: 0.5rem;
+  }
 `;
 export const Top = styled.div`
   display: flex;
@@ -32,6 +36,10 @@ export const TopButton = styled.button`
   border-bottom: 3px solid transparent;
   ${(props) => (props.active ? `border-bottom: 3px solid #e4002b;` : "")}
   transition: all 0.1s ease-in;
+  @media (max-width: 500px) {
+    font-size: 1.3rem;
+    padding: 1rem 3rem;
+  }
 `;
 export const SearchButton = styled.button`
   padding: 1rem 1.5rem;
@@ -40,6 +48,10 @@ export const SearchButton = styled.button`
   background-color: ${(props) => props.theme.color.brand};
   border-radius: 2rem;
   cursor: pointer;
+  @media (max-width: 500px) {
+    font-size: 1.3rem;
+    padding: 0.8rem 1rem;
+  }
 `;
 export const BottomButton = styled.button`
   border: none;
@@ -48,13 +60,30 @@ export const BottomButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: ${(props) => props.theme.color.gray};
+  font-size: 1.8rem;
+  color: ${(props) => props.theme.color.grayDark};
+  font-weight: 300;
   width: 90%;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 0.5rem;
   transition: all 0.1s ease-in-out;
   &:hover {
     background-color: #f4f4f4;
   }
+  @media (max-width: 500px) {
+    padding: 0.3rem;
+    font-size: 1.5rem;
+  }
 `;
 export const Icon = styled.img``;
+export const Overlay = styled.div`
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--blur);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

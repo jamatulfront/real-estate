@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { url } from "../../config/url";
 const Container = styled.div`
   height: 100vh;
@@ -20,6 +20,9 @@ const Button = styled.button`
   border: none;
   font-weight: 300;
   cursor: pointer;
+  @media (max-width: 800px) {
+    font-size: 10rem;
+  }
 `;
 const ExitButton = styled.button`
   border: none;

@@ -29,6 +29,8 @@ import uploadUrl from "../../assets/icons/upload.png";
 import useInput from "../../hooks/useInput";
 import { updateUser } from "../../contexts/user/userActions";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../config/url";
+import Footer from "../../components/footer/footer";
 
 export default function ProfileUpdate() {
   //user context
@@ -139,10 +141,7 @@ export default function ProfileUpdate() {
           </Text>
           <Form>
             <Label htmlFor="avatar-input">
-              <Avatar
-                src={image ? image : "http://localhost:8000" + user.photo}
-                alt=""
-              />
+              <Avatar src={image ? image : url + user.photo} alt="" />
               <UploadIcon src={uploadUrl} alt="Upload" />
               <FileInput
                 onChange={onChangeFile}
@@ -199,6 +198,7 @@ export default function ProfileUpdate() {
           </Form>
         </Pan>
       </Frame>
+      <Footer />
     </Container>
   );
 }

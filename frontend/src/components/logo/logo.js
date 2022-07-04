@@ -14,6 +14,9 @@ const Text = styled.h3`
   font-family: serif;
   color: ${(props) => props.theme.color.grayDark};
   margin: 0;
+  @media (max-width: 500px) {
+    font-size: 1.8rem;
+  }
 `;
 const Circle = styled.span`
   background-color: ${(props) => props.theme.color.brand};
@@ -24,6 +27,10 @@ const Circle = styled.span`
   align-items: center;
   justify-content: center;
   margin-right: 0.5rem;
+  @media (max-width: 500px) {
+    height: 2rem;
+    width: 2rem;
+  }
 `;
 const HomeLink = styled(Link)`
   text-decoration: none;
@@ -37,7 +44,7 @@ export default function Logo() {
     <Pan>
       <HomeLink to="/">
         <Circle>
-          <HomeIcon height="2rem" width="2rem" />
+          <HomeIcon height="1.4rem" width="1.4rem" />
         </Circle>
         <Text>realstateDhaka.com</Text>
       </HomeLink>

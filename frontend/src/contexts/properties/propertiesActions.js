@@ -1,8 +1,10 @@
 import axios from "axios";
-const url = "http://localhost:8000/api/v1/properties";
+import { autoCompleteUrl } from "../../config/config";
+import { url } from "../../config/url";
+const backendUrl = url + "/api/v1/properties";
 
 const propertyInstance = axios.create({
-  baseURL: url,
+  baseURL: backendUrl,
   headers: {
     Authorization: `Bearer ${localStorage.getItem("real_state-token")}`,
   },
@@ -38,5 +40,21 @@ export const getSingleProperty = async (propertyId) => {
       Accept: "application/json",
     },
   });
+  return await response;
+};
+export const callAutoComplete = async (text) => {
+  let response = await axios.get(autoCompleteUrl.replace("YOUR_TEXT", text));
+  return await response;
+};
+
+export const searchPropertiesWithin = async (lat, long) => {
+  let response = propertyInstance.get(
+    `/properties-within/5/center/${lat},${long}/unit/mi`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  );
   return await response;
 };

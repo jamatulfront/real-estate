@@ -82,8 +82,8 @@ exports.createProperty = factory.createOne(Property);
 exports.updateProperty = factory.updateOne(Property);
 exports.deleteProperty = factory.deleteOne(Property);
 
-// /tours-within/:distance/center/:latlng/unit/:unit
-// /tours-within/233/center/34.111745,-118.113491/unit/mi
+// /properties/:distance/center/:latlng/unit/:unit/
+// /properties/233/center/34.111745,-118.113491/unit/mi
 exports.getPropertiesWithin = catchAsync(async (req, res, next) => {
   const { distance, latlng, unit } = req.params;
   const [lat, lng] = latlng.split(",");
@@ -107,7 +107,7 @@ exports.getPropertiesWithin = catchAsync(async (req, res, next) => {
     status: "success",
     results: properties.length,
     data: {
-      data: tours,
+      data: properties,
     },
   });
 });

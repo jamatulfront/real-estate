@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Bottom,
   Top,
@@ -7,15 +7,83 @@ import {
   TopButton,
   BottomButton,
   Icon,
+  Overlay,
 } from "./styledPropertySearch";
 import search from "../../assets/icons/search.png";
 import SearchPopUp from "./searchPopUp";
+import { searchPropertiesWithin } from "../../contexts/properties/propertiesActions";
+import { useProperty } from "../../contexts/properties/propertiesContext";
+import { useNavigate } from "react-router-dom";
+import FadeLoader from "react-spinners/FadeLoader";
+import { ErrorMessage } from "../../pages/signin/styledSignIn";
 
-export default function PropertySearch({ isBuy = true, isRent = false }) {
-  const [btnValue, setBtnValue] = useState("Search by locations...");
-  const [buy, setBuy] = useState(isBuy);
-  const [rent, setRent] = useState(isRent);
+export default function PropertySearch({ isBuy = true }) {
+  const [btnValue, setBtnValue] = useState(
+    "Type the location to search for properties..."
+  );
+  const [buy, setBuy] = useState(false);
+  const [rent, setRent] = useState(false);
+  console.log(rent);
   const [showPopUp, setShowPopUp] = useState(false);
+  const [searchData, setSearchData] = useState(null);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const { searchResults, dispatch } = useProperty();
+  const navigateTo = useNavigate();
+  //refreshing the searchResults
+  useEffect(() => {
+    if (isBuy) {
+      setBuy(true);
+      setRent(false);
+    } else {
+      setBuy(false);
+      setRent(true);
+    }
+    dispatch({ type: "REFRESH" });
+  }, [isBuy]);
+  useEffect(() => {
+    if (searchData) {
+      setBtnValue(searchData.address_line1);
+    }
+  }, [searchData]);
+
+  const filterResults = (data) => {
+    let filtered = data.filter((d) => {
+      if (buy) return d.forSale === true;
+      else return d.forRent === true;
+    });
+    return filtered;
+  };
+
+  const searchProperties = async (e) => {
+    setLoading(true);
+    if (!searchData) {
+      return;
+    }
+    try {
+      const { data } = await searchPropertiesWithin(
+        searchData.lat,
+        searchData.lon
+      );
+      let filtered = filterResults(data.data.data);
+      console.log(btnValue);
+      dispatch({
+        type: "SEARCH",
+        payload: {
+          searchResults: filtered,
+          resultsPlace: btnValue,
+        },
+      });
+      setLoading(false);
+      navigateTo("/property/search");
+    } catch (error) {
+      setLoading(false);
+      setError("Failed to searching. Try again later.");
+      setTimeout(() => setError(""), 3000);
+    }
+  };
 
   return (
     <Container>
@@ -48,9 +116,20 @@ export default function PropertySearch({ isBuy = true, isRent = false }) {
           <Icon style={{ marginRight: ".5rem" }} alt="icon" src={search} />
           {btnValue}
         </BottomButton>
-        <SearchButton>Search</SearchButton>
+        <SearchButton onClick={searchProperties}>Search</SearchButton>
       </Bottom>
-      {showPopUp && <SearchPopUp setShowPopUp={setShowPopUp} />}
+      {showPopUp && (
+        <SearchPopUp
+          setSearchData={setSearchData}
+          setShowPopUp={setShowPopUp}
+        />
+      )}
+      {loading && (
+        <Overlay>
+          <FadeLoader loading={loading} color={"white"} size={35}></FadeLoader>
+        </Overlay>
+      )}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>
   );
 }

@@ -1,9 +1,10 @@
+import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
 import PropertySearch from "../../components/propertySearch/propertySearch";
 import ShowCase from "../../components/showcase/showCase";
 import { Container, Heading, ShowCaseWrapper } from "./styledHome";
 
-export default function Home() {
+export default function Home({ isBuy = true }) {
   return (
     <Container>
       <Header />
@@ -12,9 +13,10 @@ export default function Home() {
           <Heading style={{ marginBottom: "2rem" }}>
             Properties to call home
           </Heading>
-          <PropertySearch />
+          <PropertySearch isBuy={isBuy} />
         </ShowCase>
       </ShowCaseWrapper>
+      <Footer />
     </Container>
   );
 }

@@ -16,6 +16,8 @@ import {
 import { signOutUser } from "../../contexts/user/userActions";
 import { useNavigate } from "react-router-dom";
 import { ErrorMessage } from "../signin/styledSignIn";
+import { url } from "../../config/url";
+import Footer from "../../components/footer/footer";
 
 export default function Profile() {
   const { user, dispatch } = useUser();
@@ -41,7 +43,7 @@ export default function Profile() {
       <Frame>
         <Heading>Account Overview</Heading>
         <Pan tight>
-          <Avatar src={"http://localhost:8000" + user.photo} alt="" />
+          <Avatar src={url + user.photo} alt="" />
           <Item>
             <ItemLabel>Username </ItemLabel>
             <ItemDetails>
@@ -89,6 +91,7 @@ export default function Profile() {
           <Button to="/profile/update">Update Your Profile</Button>
         </Pan>
       </Frame>
+      <Footer />
     </Container>
   );
 }

@@ -9,6 +9,8 @@ import ProfileUpdate from "./pages/profileUpdate/profileUpdate";
 import AddProperty from "./pages/addProperty/addProperty";
 import NewHomes from "./pages/newHomes/newHomes";
 import PropertyDetails from "./pages/propertyDetails/propertyDetails";
+import SearchResult from "./pages/searchResults/searchResults";
+import Blogs from "./pages/blogs/blogs";
 function App() {
   return (
     <>
@@ -24,12 +26,21 @@ function App() {
         </Route>
 
         <Route path="/" element={<Home />} exact />
+        <Route path="/buy" element={<Home />} exact />
+        <Route path="/rent" element={<Home isBuy={false} />} exact />
         <Route path="/newHomes" element={<NewHomes />} exact />
+        <Route
+          path="/explores"
+          element={<NewHomes title="Explores Properties -" />}
+          exact
+        />
+        <Route path="/blogs" element={<Blogs />} exact />
         <Route
           path="/property/:propertyId"
           element={<PropertyDetails />}
           exact
         />
+        <Route path="/property/search" element={<SearchResult />} exact />
       </Routes>
     </>
   );

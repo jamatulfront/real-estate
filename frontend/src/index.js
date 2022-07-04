@@ -6,6 +6,7 @@ import App from "./App";
 import "normalize.css";
 import "./index.css";
 import { UserProvider } from "./contexts/user/userContext";
+import { PropertyProvider } from "./contexts/properties/propertiesContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <BrowserRouter>
       <GlobalTheme>
         <UserProvider>
-          <App />
+          <PropertyProvider>
+            <App />
+          </PropertyProvider>
         </UserProvider>
       </GlobalTheme>
     </BrowserRouter>
