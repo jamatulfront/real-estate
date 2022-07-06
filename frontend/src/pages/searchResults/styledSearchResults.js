@@ -2,16 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div``;
 export const Pan = styled.div`
-  margin-top: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 90vh;
 `;
-export const Frame = styled.div`
-  margin-top: 8rem;
-`;
+export const Frame = styled.div``;
 export const Heading = styled.h1`
   font-size: 2.8rem;
   letter-spacing: 1px;

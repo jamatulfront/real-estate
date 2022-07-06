@@ -17,6 +17,7 @@ import useInput from "../../hooks/useInput";
 import { signUpUser } from "../../contexts/user/userActions";
 import { useUser } from "../../contexts/user/userContext";
 import BounceLoader from "react-spinners/BounceLoader";
+import Footer from "../../components/footer/footer";
 
 const StyledLink = styled(Link)`
   color: #0078bd;
@@ -96,6 +97,7 @@ export default function SignUp() {
           <StyledLink to={"/auth/signin"}>Sign in</StyledLink>
         </Text>
       </Frame>
+      <Footer/>
     </Container>
   );
 }

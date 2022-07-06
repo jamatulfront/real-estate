@@ -7,10 +7,22 @@ const Container = styled.div`
   padding: 2rem 10rem;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   background-color: #fff;
-  margin-top: 8rem;
+  // margin-top: 6rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  position: fixed;
+  top: 6rem;
+  z-index: 1;
+  @media (max-width: 800px) {
+    justify-content: center;
+    padding: 1rem 5rem;
+    height: 6rem;
+  }
+  @media (max-width: 500px) {
+    padding: 1rem 2rem;
+    height: 4rem;
+  }
 `;
 const FilterButtonWrapper = styled.div`
   display: flex;
@@ -32,19 +44,53 @@ const Button = styled.button`
     padding: 0.5rem 1rem;
   }
 `;
-export default function PropertyFilter() {
+export default function PropertyFilter({ filterProp, setFilterProp }) {
   const [showPopUp, setShowPopUp] = useState(false);
+  const [focusField, setFocusField] = useState("");
   return (
     <>
       {showPopUp ? (
-        <FilterPopUp setShowPopUp={setShowPopUp} />
+        <FilterPopUp
+          filterProp={filterProp}
+          setFilterProp={setFilterProp}
+          focusField={focusField}
+          setShowPopUp={setShowPopUp}
+        />
       ) : (
         <Container>
           <FilterButtonWrapper>
-            <Button onClick={() => setShowPopUp(true)}>Property type</Button>
-            <Button onClick={() => setShowPopUp(true)}>Price</Button>
-            <Button onClick={() => setShowPopUp(true)}>Bed</Button>
-            <Button onClick={() => setShowPopUp(true)}>Filters</Button>
+            <Button
+              onClick={() => {
+                setShowPopUp(true);
+                setFocusField("");
+              }}
+            >
+              Property type
+            </Button>
+            <Button
+              onClick={() => {
+                setShowPopUp(true);
+                setFocusField("price");
+              }}
+            >
+              Price
+            </Button>
+            <Button
+              onClick={() => {
+                setShowPopUp(true);
+                setFocusField("beds");
+              }}
+            >
+              Bed
+            </Button>
+            <Button
+              onClick={() => {
+                setShowPopUp(true);
+                setFocusField("");
+              }}
+            >
+              Filters
+            </Button>
           </FilterButtonWrapper>
         </Container>
       )}

@@ -10,24 +10,31 @@ export const Pan = styled.div`
   height: 90vh;
 `;
 export const Frame = styled.div`
-  margin-top: 10rem;
-
-  padding: 1rem 2rem;
+  margin-top: 13rem;
+  padding: 3rem 2rem;
+  @media (max-width: 500px) {
+    margin-top: 9rem;
+  }
 `;
 export const Heading = styled.h1`
-  border-bottom: 1px solid ${(props) => props.theme.color.whiteDark};
   font-size: 2.8rem;
   padding-bottom: 1rem;
   padding-left: 13rem;
   letter-spacing: 1px;
   color: ${(props) => props.theme.color.grayDark};
   text-align: left;
-  font-weight: 500;
+  font-weight: 700;
   margin: 0;
   margin-top: 0.5rem;
   line-height: 1.2;
+  @media (max-width: 800px) {
+    text-align: center;
+    padding-bottom: 0;
+    padding-left: 0;
+  }
   @media (max-width: 500px) {
     font-size: 2.2rem;
+    padding-bottom: 0.5rem;
   }
 `;
 export const ProductsWrapper = styled.div`

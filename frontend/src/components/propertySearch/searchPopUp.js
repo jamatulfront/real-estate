@@ -41,6 +41,7 @@ const Top = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 2rem;
 `;
 const InputWrapper = styled.div`
   flex: 5;
@@ -48,7 +49,7 @@ const InputWrapper = styled.div`
   align-items: center;
   img {
     position: absolute;
-    top: 2.8rem;
+    top: 4.800000000000001rem;
     left: 3rem;
   }
 `;
@@ -106,7 +107,7 @@ const BackButton = styled.button`
   cursor: pointer;
   position: absolute;
   top: 1.2rem;
-  left: 1rem;
+  left: 3rem;
   background: transparent;
   img {
     height: 2rem;
@@ -146,7 +147,7 @@ export default function SearchPopUp({ setSearchData, setShowPopUp }) {
               type="text"
               value={text}
               onChange={onChangeInput}
-              placeholder="Search area in Dhaka city"
+              placeholder="Name of the location ... "
             ></Input>
           </InputWrapper>
           <DoneButton

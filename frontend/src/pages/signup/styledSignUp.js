@@ -8,6 +8,7 @@ export const Container = styled.div`
   background: url(${bgImgUrl});
   background-size: 100%;
   display: flex;
+  flex-direction: column;
 `;
 export const Frame = styled.div`
   width: 40rem;

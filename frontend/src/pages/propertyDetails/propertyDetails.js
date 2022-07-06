@@ -16,7 +16,6 @@ import Footer from "../../components/footer/footer";
 import { useUser } from "../../contexts/user/userContext";
 
 const Container = styled.div`
-  background: #f4f4f4;
   width: 100%;
 `;
 const Pan = styled.div`
@@ -45,6 +44,7 @@ const SectionTop = styled.section`
   max-width: 80vw;
   height: 83vh;
   padding-top: 4rem;
+  background: #fff;
   @media (max-width: 1105px) {
     flex-direction: column;
     align-items: center;
@@ -274,7 +274,6 @@ export default function PropertyDetails() {
         setProperty(data.data.data);
         setLoading(false);
         setError("");
-        console.log(user._id, data.data.data.owner._id);
         if (user._id === data.data.data.owner._id) {
           setCanEdit(true);
         }

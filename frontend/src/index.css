@@ -12,6 +12,7 @@
   --blur: rgba(0, 0, 0, 0.523);
   --gray: #959199;
   --grayDark: #3d3b40;
+  --blue: rgb(11, 133, 182);
 }
 html {
   font-size: 62.5%;

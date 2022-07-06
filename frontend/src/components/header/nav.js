@@ -14,7 +14,7 @@ const ListLink = styled(Link)`
   text-decoration: none;
   color: ${(props) => props.theme.color.grayDark};
   font-weight: 500;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   transition: all 0.3s ease-out;
   &:hover {

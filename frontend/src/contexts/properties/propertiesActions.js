@@ -5,14 +5,12 @@ const backendUrl = url + "/api/v1/properties";
 
 const propertyInstance = axios.create({
   baseURL: backendUrl,
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("real_state-token")}`,
-  },
 });
 export const addProperty = async (property) => {
   let response = propertyInstance.post("/", property, {
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("real_state-token")}`,
     },
   });
   return await response;
@@ -21,6 +19,7 @@ export const uploadPropertyImages = async (propertyId, imgData) => {
   let response = propertyInstance.post("/upload/" + propertyId, imgData, {
     headers: {
       "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("real_state-token")}`,
     },
   });
   return await response;

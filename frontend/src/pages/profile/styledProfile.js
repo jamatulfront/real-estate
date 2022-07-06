@@ -53,8 +53,8 @@ export const ItemText = styled.p`
   font-size: 1.4rem;
 `;
 export const Avatar = styled.img`
-  height: 14rem;
-  width: 14rem;
+  height: 8rem;
+  width: 8rem;
   border-radius: 50%;
   background: ${(props) => props.theme.color.grayDark};
   margin-bottom: 1rem;

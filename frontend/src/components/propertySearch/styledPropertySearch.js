@@ -22,6 +22,7 @@ export const Bottom = styled.div`
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const TopButton = styled.button`
@@ -42,7 +43,8 @@ export const TopButton = styled.button`
   }
 `;
 export const SearchButton = styled.button`
-  padding: 1rem 1.5rem;
+  padding: 0.6rem 2rem;
+  height: 4rem;
   border: none;
   color: ${(props) => props.theme.color.white};
   background-color: ${(props) => props.theme.color.brand};
@@ -50,7 +52,7 @@ export const SearchButton = styled.button`
   cursor: pointer;
   @media (max-width: 500px) {
     font-size: 1.3rem;
-    padding: 0.8rem 1rem;
+    padding: 0.4rem 1rem;
   }
 `;
 export const BottomButton = styled.button`

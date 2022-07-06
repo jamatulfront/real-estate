@@ -21,13 +21,13 @@ const Container = styled.div`
     height: 60vh;
   }
   @media (max-width: 800px) {
-    height: 40vh;
+    height: 50vh;
   }
   @media (max-width: 500px) {
-    height: 30vh;
+    height: 45vh;
   }
   @media (max-width: 380px) {
-    height: 25vh;
+    height: 35vh;
   }
 `;
 export default function ShowCase({ children, ...props }) {

@@ -24,7 +24,7 @@ const BlackBackground = styled.div`
   height: calc(100vh - 6rem);
   width: 100vw;
   position: fixed;
-  top: 8rem;
+  top: 6rem;
   left: 0;
   transform: scaleX(1.3);
   overflow: hidden;
@@ -34,9 +34,9 @@ const LeftBackground = styled.div`
   height: calc(100vh - 6rem);
   width: 40vw;
   position: fixed;
-  top: 8rem;
-  left: -5rem;
-  z-index: 1000;
+  top: 6rem;
+  left: 0;
+  z-index: 400000;
   overflowy: hidden;
   @media (max-width: 800px) {
     width: 50vw;
@@ -47,10 +47,18 @@ const LeftBackground = styled.div`
 `;
 const LeftMenu = styled.ul`
   position: fixed;
-  top: 8rem;
-  z-index: 1000;
+  top: 6rem;
+  left: 0;
+  z-index: 400000;
   padding: 3rem 3rem;
   width: 40vw;
+  @media (max-width: 800px) {
+    width: 50vw;
+  }
+  @media (max-width: 400px) {
+    width: 100vw;
+    text-align: center;
+  }
 `;
 const LeftMenuItem = styled.li`
   list-style: none;
@@ -88,7 +96,7 @@ export default function LeftNav() {
             <LeftMenuLink to="/rent">Rent</LeftMenuLink>
           </LeftMenuItem>
           <LeftMenuItem>
-            <LeftMenuLink to="/expolores">Explores</LeftMenuLink>
+            <LeftMenuLink to="/explores">Explores</LeftMenuLink>
           </LeftMenuItem>
           <LeftMenuItem>
             <LeftMenuLink to="/newHomes">New Homes</LeftMenuLink>

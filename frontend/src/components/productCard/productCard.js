@@ -56,8 +56,8 @@ const RedCircle = styled.div`
   background-color: ${(props) => props.theme.color.brand};
   color: ${(props) => props.theme.color.white};
   position: absolute;
-  top: 0.2rem;
-  right: 0.2rem;
+  top: 0.8rem;
+  right: 0.8rem;
   line-height: 1;
   display: flex;
   align-items: center;
