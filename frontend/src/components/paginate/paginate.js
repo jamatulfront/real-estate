@@ -1,9 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const Container = styled.div`
-  padding-left: 14rem;
-`;
+const Container = styled.div``;
 const Button = styled.button`
   padding: 1rem 1.5rem;
   border: none;
@@ -12,52 +10,111 @@ const Button = styled.button`
   border: 1px solid ${(props) => props.theme.color.whiteDark};
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s linear;
 `;
-export default function Paginate({ total, currentPage, setPage }) {
+
+let scrollOptions = {
+  block: "start",
+  inline: "nearest",
+  behaviour: "smooth",
+};
+export default function Paginate({
+  total,
+  currentPage,
+  setPage,
+  maxIncrement = 5,
+  parentRef,
+}) {
+  const [maxIncre] = useState(maxIncrement);
+  const [start, setStart] = useState(1);
+  const [end, setEnd] = useState(maxIncre);
+
+  //handeling the normal page button
   const handlePagination = (page) => {
     setPage(page);
+    scrollToTargetAdjusted();
   };
+
+  //render general buttons
+  function renderButtons(start, end) {
+    return arrayFrom(start, end).map((page, i) => (
+      <Button
+        key={i}
+        active={currentPage === page}
+        onClick={() => handlePagination(page)}
+      >
+        {page}
+      </Button>
+    ));
+  }
+
+  // for incrementing a step at the right side
+  function maxIncrementRight() {
+    let s = start;
+    if (start + maxIncre <= total) {
+      setStart(s + maxIncre);
+      if (s + maxIncre * 2 <= total) {
+        setEnd(s + maxIncre * 2 - 1);
+      } else {
+        setEnd(total);
+      }
+    }
+  }
+  // for decrementing a step at the left side
+  function maxDecrementLeft() {
+    let s = start;
+    if (start - maxIncre >= 0) {
+      setStart(s - maxIncre);
+      if (s + maxIncre * 2 >= 0) {
+        setEnd(s - 1);
+      } else {
+        setEnd(1);
+      }
+    }
+  }
+
+  // handling the scroll after every press in the button
+  function scrollToTargetAdjusted() {
+    var element = parentRef.current;
+    var headerOffset = 200;
+    var elementPosition = element.getBoundingClientRect().top;
+    var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+  }
 
   return (
     <Container>
-      <Button
-        onClick={() => {
-          if (currentPage === 1) {
-            return;
-          }
-          setPage((page) => page - 1);
-        }}
-      >
-        prev
-      </Button>
-      <Button
-        onClick={() => {
-          if (currentPage === total) {
-            return;
-          }
-          setPage((page) => page + 1);
-        }}
-      >
-        next
-      </Button>
-      {createDumpArray(total).map((v, i) => (
-        <Button
-          active={currentPage === i + 1}
-          key={i}
-          onClick={(e) => handlePagination(i + 1)}
-        >
-          {i + 1}
+      {start - maxIncre > 0 && (
+        <Button onClick={maxDecrementLeft}>{"<"}</Button>
+      )}
+      {total > 1 && renderButtons(start, end)}
+      {total - start > maxIncre && (
+        <Button style={{ cursor: "none" }} disabled>
+          ...
         </Button>
-      ))}
+      )}
+      {total - start >= maxIncre && (
+        <Button
+          active={currentPage === total}
+          onClick={() => handlePagination(total)}
+        >
+          {total}
+        </Button>
+      )}
+      {total - start > maxIncre && (
+        <Button onClick={maxIncrementRight}>{">"}</Button>
+      )}
     </Container>
   );
 }
 
-function createDumpArray(size) {
+function arrayFrom(start, end) {
   let array = [];
-  for (let i = 0; i < size; i++) {
-    array.push(i + 1);
+  for (let i = start; i <= end; i++) {
+    array.push(i);
   }
   return array;
 }

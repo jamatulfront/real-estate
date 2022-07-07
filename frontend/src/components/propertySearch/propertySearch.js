@@ -16,12 +16,9 @@ import { useProperty } from "../../contexts/properties/propertiesContext";
 import { useNavigate } from "react-router-dom";
 import FadeLoader from "react-spinners/FadeLoader";
 import { ErrorMessage } from "../../pages/signin/styledSignIn";
-import { useMediaQuery } from "react-responsive";
 
 export default function PropertySearch({ isBuy = true }) {
-  const [btnValue, setBtnValue] = useState(
-    "Type the location to search for properties..."
-  );
+  const [btnValue, setBtnValue] = useState("location of the properties...");
   const [buy, setBuy] = useState(false);
   const [rent, setRent] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
@@ -30,12 +27,9 @@ export default function PropertySearch({ isBuy = true }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { searchResults, dispatch } = useProperty();
+  const { dispatch } = useProperty();
   const navigateTo = useNavigate();
 
-  const isMobile = useMediaQuery({
-    query: "(max-width:600px)",
-  });
   //refreshing the searchResults
   useEffect(() => {
     if (isBuy) {
@@ -52,14 +46,6 @@ export default function PropertySearch({ isBuy = true }) {
       setBtnValue(searchData.address_line1);
     }
   }, [searchData]);
-
-  useEffect(() => {
-    if (isMobile) {
-      setBtnValue("Type properties location ...");
-    } else {
-      setBtnValue("Type the location to search for properties...");
-    }
-  }, [isMobile, btnValue]);
 
   const filterResults = (data) => {
     let filtered = data.filter((d) => {

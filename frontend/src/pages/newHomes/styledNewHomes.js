@@ -12,8 +12,12 @@ export const Pan = styled.div`
 export const Frame = styled.div`
   margin-top: 13rem;
   padding: 3rem 2rem;
+  min-height: calc(100vh - 25rem);
+  @media (max-width: 800px) {
+    margin-top: 12rem;
+  }
   @media (max-width: 500px) {
-    margin-top: 9rem;
+    margin-top: 10rem;
   }
 `;
 export const Heading = styled.h1`
@@ -46,6 +50,7 @@ export const ProductsWrapper = styled.div`
   padding: 2rem 10rem;
   @media (max-width: 1300px) {
     padding: 2rem 5rem;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
   }
   @media (max-width: 1100px) {
     padding: 2rem 3rem;
@@ -53,9 +58,30 @@ export const ProductsWrapper = styled.div`
   @media (max-width: 800px) {
     padding: 2rem 2rem;
     justify-content: center;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 650px) {
+    grid-template-columns: 1fr;
   }
   @media (max-width: 500px) {
     padding: 2rem 1rem;
     justify-content: center;
   }
+`;
+export const SortWrapper = styled.div`
+  position: absolute;
+  top: 17rem;
+  right: 2rem;
+  @media (max-width: 700px) {
+    top: 16rem;
+  }
+  @media (max-width: 500px) {
+    top: 13rem;
+  }
+`;
+
+export const PaginateWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

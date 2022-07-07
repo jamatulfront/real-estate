@@ -71,7 +71,7 @@ exports.uploadMultiplePropertyImages = async (req, res) => {
 //************************************************************************************************ */
 
 exports.aliasRecentProperties = (req, res, next) => {
-  req.query.limit = "5";
+  req.query.limit = "50";
   req.query.sort = "-createdAt";
   next();
 };

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import FilterPopUp from "./filterPopUp";
+import FilterIcon from "../../assets/icons/filter";
 const Container = styled.div`
   height: 7rem;
   width: 100%;
@@ -16,12 +17,13 @@ const Container = styled.div`
   z-index: 1;
   @media (max-width: 800px) {
     justify-content: center;
+    flex-wrap: wrap;
     padding: 1rem 5rem;
-    height: 6rem;
+    height: 8rem;
   }
   @media (max-width: 500px) {
     padding: 1rem 2rem;
-    height: 4rem;
+    height: 5rem;
   }
 `;
 const FilterButtonWrapper = styled.div`
@@ -36,6 +38,9 @@ const Button = styled.button`
   border-radius: 2rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   &:hover {
     background-color: ${(props) => props.theme.color.whiteDark};
   }
@@ -81,7 +86,7 @@ export default function PropertyFilter({ filterProp, setFilterProp }) {
                 setFocusField("beds");
               }}
             >
-              Bed
+              Beds
             </Button>
             <Button
               onClick={() => {
@@ -89,7 +94,7 @@ export default function PropertyFilter({ filterProp, setFilterProp }) {
                 setFocusField("");
               }}
             >
-              Filters
+              <FilterIcon /> Filters
             </Button>
           </FilterButtonWrapper>
         </Container>

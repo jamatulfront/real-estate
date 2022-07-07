@@ -3,6 +3,7 @@ import styled from "styled-components";
 import menuIconUrl from "../../assets/icons/menu.png";
 import crossIconUrl from "../../assets/icons/cross.png";
 import { Link } from "react-router-dom";
+import { useUser } from "../../contexts/user/userContext";
 
 const Container = styled.div`
   position: relative;
@@ -76,7 +77,7 @@ export default function LeftNav() {
   let toggleShowMenu = (e) => {
     setShowMenu((showMenu) => !showMenu);
   };
-
+  const { user } = useUser();
   return (
     <Container>
       <MenuIconWrapper>
@@ -104,9 +105,12 @@ export default function LeftNav() {
           <LeftMenuItem>
             <LeftMenuLink to="/blogs">Blogs</LeftMenuLink>
           </LeftMenuItem>
-          <LeftMenuItem>
-            <LeftMenuLink to="/addProperty">Add a Property</LeftMenuLink>
-          </LeftMenuItem>
+          {user.role === "agent" ||
+            (user.role === "admin" && (
+              <LeftMenuItem>
+                <LeftMenuLink to="/addProperty">Add a Property</LeftMenuLink>
+              </LeftMenuItem>
+            ))}
         </LeftMenu>
       )}
     </Container>

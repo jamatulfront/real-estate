@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../../components/header/header";
 import ProductCard from "../../components/productCard/productCard";
 import { getRecentProperties } from "../../contexts/properties/propertiesActions";
@@ -8,6 +8,8 @@ import {
   Frame,
   Heading,
   ProductsWrapper,
+  SortWrapper,
+  PaginateWrapper,
 } from "./styledNewHomes";
 import MoonLoader from "react-spinners/MoonLoader";
 import { ErrorMessage } from "../signin/styledSignIn";
@@ -16,13 +18,18 @@ import PropertyFilter from "../../components/propertyFilter/propertyFilter";
 import { getTotalPagesSize, paginate } from "../../utils/paginate";
 import Paginate from "../../components/paginate/paginate";
 import { getFilteredArray } from "../../utils/filter";
+import Sort from "../../components/sort/sort";
+import sortItems from "../../utils/sort";
 export default function NewHomes({ title = "Fresh Homes For You -" }) {
   let [properties, setProperties] = useState([]);
   let [loading, setLoading] = useState(true);
   let [error, setError] = useState("");
   let [currentPage, setCurrentPage] = useState(1);
-  let [pageItemsSize, setPageItemsSize] = useState(4);
+  let [pageItemsSize, setPageItemsSize] = useState(6);
   let [filterProp, setFilterProp] = useState({ propertyTypes: "all" });
+  let [sortProp, setSortProp] = useState({ field: "", order: "asc" });
+
+  let productsRef = useRef();
   useEffect(() => {
     async function fetchProperties() {
       try {
@@ -37,7 +44,7 @@ export default function NewHomes({ title = "Fresh Homes For You -" }) {
     }
     fetchProperties();
   }, []);
-  useEffect(() => {}, [filterProp]);
+
   return (
     <Container>
       <Header />
@@ -48,29 +55,40 @@ export default function NewHomes({ title = "Fresh Homes For You -" }) {
           {error && <ErrorMessage>{error}</ErrorMessage>}
         </Pan>
       )}
-      {properties.length > 0 && (
-        <Frame>
-          <Heading>{title}</Heading>
+      (
+      <Frame ref={productsRef}>
+        <Heading>{title}</Heading>
+        <SortWrapper>
+          <Sort setSortProp={setSortProp} />
+        </SortWrapper>
+        {properties.length > 0 && (
           <ProductsWrapper>
             {paginate(
               currentPage,
               pageItemsSize,
-              getFilteredArray(properties, filterProp)
+              sortItems(
+                sortProp.field,
+                sortProp.order,
+                getFilteredArray(properties, filterProp)
+              )
             ).map((p, i) => (
               <ProductCard key={i} product={p} />
             ))}
           </ProductsWrapper>
-        </Frame>
-      )}
-      {}
-      <Paginate
-        total={getTotalPagesSize(
-          pageItemsSize,
-          getFilteredArray(properties, filterProp).length
         )}
-        currentPage={currentPage}
-        setPage={setCurrentPage}
-      />
+      </Frame>
+      )
+      <PaginateWrapper>
+        <Paginate
+          total={getTotalPagesSize(
+            pageItemsSize,
+            getFilteredArray(properties, filterProp).length
+          )}
+          currentPage={currentPage}
+          setPage={setCurrentPage}
+          parentRef={productsRef}
+        />
+      </PaginateWrapper>
       <Footer />
     </Container>
   );
