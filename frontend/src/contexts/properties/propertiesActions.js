@@ -57,3 +57,12 @@ export const searchPropertiesWithin = async (lat, long) => {
   );
   return await response;
 };
+
+export const getPropertiesByAgentId = async (agentId) => {
+  let response = await propertyInstance.get(`/?owner=${agentId}`, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+  return await response;
+};

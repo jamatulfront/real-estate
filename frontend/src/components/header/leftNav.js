@@ -105,12 +105,6 @@ export default function LeftNav() {
           <LeftMenuItem>
             <LeftMenuLink to="/blogs">Blogs</LeftMenuLink>
           </LeftMenuItem>
-          {user.role === "agent" ||
-            (user.role === "admin" && (
-              <LeftMenuItem>
-                <LeftMenuLink to="/addProperty">Add a Property</LeftMenuLink>
-              </LeftMenuItem>
-            ))}
         </LeftMenu>
       )}
     </Container>

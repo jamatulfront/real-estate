@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div``;
@@ -25,10 +25,14 @@ export default function Paginate({
   maxIncrement = 5,
   parentRef,
 }) {
-  const [maxIncre] = useState(maxIncrement);
+  const [maxIncre, setMaxIncre] = useState(0);
   const [start, setStart] = useState(1);
-  const [end, setEnd] = useState(maxIncre);
+  const [end, setEnd] = useState(0);
 
+  useEffect(() => {
+    setMaxIncre(maxIncrement);
+    setEnd(maxIncrement > total ? total : maxIncrement);
+  }, [total, maxIncrement]);
   //handeling the normal page button
   const handlePagination = (page) => {
     setPage(page);

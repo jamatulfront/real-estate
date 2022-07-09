@@ -11,6 +11,7 @@ import NewHomes from "./pages/newHomes/newHomes";
 import PropertyDetails from "./pages/propertyDetails/propertyDetails";
 import SearchResult from "./pages/searchResults/searchResults";
 import Blogs from "./pages/blogs/blogs";
+import AgentProfile from "./pages/agentProfile/agentProfile";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="profile" element={<Profile />} exact />
           <Route path="profile/update" element={<ProfileUpdate />} exact />
           <Route path="/addProperty" element={<AddProperty />} exact />
+          <Route path="/agent/:id" element={<AgentProfile />} exact />
         </Route>
 
         <Route path="/" element={<Home />} exact />

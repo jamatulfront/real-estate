@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { url } from "../../config/url";
 import { useUser } from "../../contexts/user/userContext";
+import UserPopUp from "../userPopUp/userPopUp";
 
 const SignInButton = styled(Link)`
   text-decoration: none;
@@ -38,7 +39,7 @@ const JoinButton = styled(Link)`
   }
 `;
 const Wrapper = styled.div``;
-const UserAvatar = styled(Link)`
+const UserAvatar = styled.div`
   height: 3.6rem;
   width: 3.6rem;
   border-radius: 50%;
@@ -46,6 +47,7 @@ const UserAvatar = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   img {
     width: 100%;
     height: 100%;
@@ -54,13 +56,22 @@ const UserAvatar = styled(Link)`
   }
 `;
 export default function UserMenu() {
+  const [showUserPopUp, setShowUserPopUp] = useState(false);
   let { user } = useUser();
   return (
     <Wrapper>
       {user ? (
-        <UserAvatar to="/profile">
-          <img src={url + user?.photo} alt="user-avatar" />
-        </UserAvatar>
+        <>
+          <UserAvatar
+            onClick={() => {
+              if (showUserPopUp) return;
+              setShowUserPopUp((val) => !val);
+            }}
+          >
+            <img src={url + user?.photo} alt="user-avatar" />
+          </UserAvatar>
+          {showUserPopUp && <UserPopUp setUserPopUp={setShowUserPopUp} />}
+        </>
       ) : (
         <>
           <SignInButton to="/auth/signin">Sign in</SignInButton>

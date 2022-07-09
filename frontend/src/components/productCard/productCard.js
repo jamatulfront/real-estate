@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import bedUrl from "../../assets/icons/bed.png";
 import squareUrl from "../../assets/icons/square.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { url } from "../../config/url";
 const Container = styled.div`
   width: 100%;
@@ -64,11 +64,21 @@ const RedCircle = styled.div`
   justify-content: center;
   font-size: 1rem;
 `;
-export default function ProductCard({ product }) {
+const EditButton = styled(Link)``;
+
+export default function ProductCard({ product, agent }) {
   const navigateTo = useNavigate();
   return (
     <Container onClick={() => navigateTo("/property/" + product._id)}>
-      <RedCircle>{product.forSale ? "For Sale" : "For Rent"}</RedCircle>
+      {!agent && (
+        <RedCircle>{product.forSale ? "For Sale" : "For Rent"}</RedCircle>
+      )}
+      {agent && (
+        <EditButton to={"/properties/" + product._id + "/update"}>
+          Update
+        </EditButton>
+      )}
+
       <Image src={url + product.images[0]} />
       <Heading>{product.name}</Heading>
       <Text>{product.location.address}</Text>
