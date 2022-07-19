@@ -13,11 +13,6 @@ const Button = styled.button`
   transition: all 0.1s linear;
 `;
 
-let scrollOptions = {
-  block: "start",
-  inline: "nearest",
-  behaviour: "smooth",
-};
 export default function Paginate({
   total,
   currentPage,

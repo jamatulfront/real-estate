@@ -50,9 +50,9 @@ const Button = styled.button`
   margin-top: 0.5rem;
 `;
 const LinkButton = styled(Link)`
-  color: var(--grayDark);
+  color: var(--blue);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 export default function UserPopUp({ setUserPopUp }) {
@@ -84,11 +84,15 @@ export default function UserPopUp({ setUserPopUp }) {
       <Avatar src={url + user.photo} alt="user-avatar" />
       <Title>{user.name}</Title>
       <GrayText>Role : {user.role}</GrayText>
-      <LinkButton to="/profile">Account Overview</LinkButton>
-      <LinkButton to="/profile/update">Update Account</LinkButton>
+      {user.role === "agent" && (
+        <LinkButton to={"/addProperty"}>Add a property</LinkButton>
+      )}
       {user.role === "agent" && (
         <LinkButton to={"/agent/" + user._id}>Your Agent Profile</LinkButton>
       )}
+      <LinkButton to="/profile/update">Update Account</LinkButton>
+      <LinkButton to="/profile">Account Overview</LinkButton>
+
       <Button onClick={handleSignOut}>Sign Out</Button>
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>

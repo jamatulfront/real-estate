@@ -25,6 +25,35 @@ export const uploadPropertyImages = async (propertyId, imgData) => {
   return await response;
 };
 
+export const removePropertyImages = async (propertyId, imgData) => {
+  let response = propertyInstance.patch("/remove/" + propertyId, imgData, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("real_state-token")}`,
+    },
+  });
+  return await response;
+};
+
+export const updateProperty = async (propertyId, property) => {
+  let response = propertyInstance.patch("/" + propertyId, property, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("real_state-token")}`,
+    },
+  });
+  return await response;
+};
+
+export const getAllProperties = async () => {
+  let response = propertyInstance.get("/?sort=createdAt", {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+  return await response;
+};
+
 export const getRecentProperties = async () => {
   let response = propertyInstance.get("/recents", {
     headers: {

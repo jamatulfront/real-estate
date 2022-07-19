@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MoonLoader from "react-spinners/MoonLoader";
 import styled from "styled-components";
 import { ErrorMessage } from "../signin/styledSignIn";
@@ -14,6 +14,7 @@ import AgentCard from "../../components/agentCard/agentCard";
 import featureIconUrl from "../../assets/icons/feature.png";
 import Footer from "../../components/footer/footer";
 import { useUser } from "../../contexts/user/userContext";
+import editIconPath from "../../assets/icons/edit.png";
 
 const Container = styled.div`
   width: 100%;
@@ -256,6 +257,10 @@ const EditButton = styled.button`
   right: 14.3rem;
   cursor: pointer;
   border: none;
+  img {
+    height: 3rem;
+    width: 3rem;
+  }
 `;
 export default function PropertyDetails() {
   let { propertyId } = useParams();
@@ -265,7 +270,7 @@ export default function PropertyDetails() {
   const [showImgPreview, setShowImgPreview] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
   const [canEdit, setCanEdit] = useState(false);
-
+  const navigateTo = useNavigate();
   let { user } = useUser();
   useEffect(() => {
     async function fetchProperty() {
@@ -288,7 +293,15 @@ export default function PropertyDetails() {
   return (
     <Container>
       <Header />
-      {canEdit && <EditButton>Edit</EditButton>}
+      {canEdit && (
+        <EditButton
+          onClick={() => {
+            navigateTo("/properties/update/" + propertyId);
+          }}
+        >
+          <img src={editIconPath} alt="edit"></img>
+        </EditButton>
+      )}
       {(loading || error) && (
         <Pan>
           <MoonLoader loading={loading} size={40} color="red" />
@@ -321,14 +334,16 @@ export default function PropertyDetails() {
                   </HeadingSecondary>
                 </TopLeft>
                 <TopRight>
-                  <LargeImg
-                    onClick={() => {
-                      setShowImgPreview(true);
-                      setImgIndex(0);
-                    }}
-                    src={url + property.images[0]}
-                    alt="PropertyImage"
-                  />
+                  {property.images.length > 0 && (
+                    <LargeImg
+                      onClick={() => {
+                        setShowImgPreview(true);
+                        setImgIndex(0);
+                      }}
+                      src={url + property.images[0]}
+                      alt="PropertyImage"
+                    />
+                  )}
                   <ImageWrapper>
                     {property?.images[1] && (
                       <Image

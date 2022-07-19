@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/header/header";
 import FormInput from "../../components/input/input";
+import {
+  getSingleProperty,
+  updateProperty,
+} from "../../contexts/properties/propertiesActions";
 
 import {
   Container,
@@ -24,25 +28,27 @@ import {
   SuccessMessage,
   Center,
   ContentWrapper,
-} from "./styledAddProperty";
+} from "./styledUpdateProperty";
 import gallaryUrl from "../../assets/icons/gallery.png";
 import useInput from "../../hooks/useInput";
 import { useUser } from "../../contexts/user/userContext";
 import {
-  addProperty,
   uploadPropertyImages,
+  removePropertyImages,
 } from "../../contexts/properties/propertiesActions";
 import { ErrorMessage } from "../../pages/signin/styledSignIn";
 import PropagateLoader from "react-spinners/PropagateLoader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/footer/footer";
+import { url } from "../../config/url";
 
-export default function AddProperty() {
+export default function UpdateProperty() {
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);
 
   const [images, setImages] = useState([]);
+  const [removedImgs, setRemovedImgs] = useState([]);
   const [imgFiles, setImgFiles] = useState([]);
 
   const name = useInput("");
@@ -51,13 +57,13 @@ export default function AddProperty() {
   const price = useInput("");
   const beds = useInput("");
   const area = useInput("");
-  const propertyType = useInput("apartment");
+  const propertyType = useInput("");
   const address = useInput("");
   const locDescription = useInput("");
   const longitute = useInput("");
   const latitute = useInput("");
-  const sale = useInput("");
-  const rent = useInput("");
+  const sale = useInput(false);
+  const rent = useInput(false);
   const feature_1 = useInput("");
   const feature_2 = useInput("");
   const feature_3 = useInput("");
@@ -66,8 +72,24 @@ export default function AddProperty() {
   const feature_6 = useInput("");
 
   const { user } = useUser();
-  let [propertyId, setPropertyId] = useState();
+  let { id } = useParams();
+  const navigateTo = useNavigate();
 
+  useEffect(() => {
+    async function fetchProperty() {
+      try {
+        const { data } = await getSingleProperty(id);
+        let property = data.data.data;
+        setLoading(false);
+        setError("");
+        loadFields(property);
+      } catch (error) {
+        setLoading(false);
+        setError("Something went wrong on loading property. Please try again.");
+      }
+    }
+    fetchProperty();
+  }, [id]);
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img) => {
@@ -208,23 +230,33 @@ export default function AddProperty() {
     }
     property.owner = user._id;
     try {
-      let { data } = await addProperty(property);
+      let { data } = await updateProperty(id, property);
 
-      // formdata for imgs
-      const formData = new FormData();
-      Object.values(imgFiles).forEach((file) => {
-        formData.append("images", file);
-      });
-      setPropertyId(data.data.data._id);
-      await uploadPropertyImages(data.data.data._id, formData);
+      // removing the images
+      if (removedImgs.length > 0) {
+        await removePropertyImages(id, removedImgs);
+      }
+
+      // updating the new images for imgs
+      if (imgFiles.length > 0) {
+        const formData = new FormData();
+        Object.values(imgFiles).forEach((file) => {
+          formData.append("images", file);
+        });
+        console.log(formData);
+        await uploadPropertyImages(id, formData);
+      }
       setTimeout(() => {
         setLoading(false);
         setError("");
         setAdded(true);
-      }, 3000);
+        navigateTo("/property/" + id);
+      }, 1000);
     } catch (error) {
       setLoading(false);
-      setError("Sorry something went wrong! please try again.");
+      setError(
+        "Sorry something went wrong while updating proeprty! please try again."
+      );
       setTimeout(() => {
         setError("");
       }, 3000);
@@ -236,18 +268,52 @@ export default function AddProperty() {
 
   const removeImage = (e) => {
     e.preventDefault();
+    let removedImage = images[e.target.id];
+    removedImage = removedImage.replace(url, "");
+    if (String(images[e.target.id]).startsWith("http")) {
+      setRemovedImgs((images) => [...images, removedImage]);
+    }
     let newImgFiles = imgFiles.filter((file, index) => index !== +e.target.id);
     let newImages = images.filter((image, index) => index !== +e.target.id);
     setImgFiles(newImgFiles);
     setImages(newImages);
   };
+
+  function loadFields(property) {
+    name.setValue(property.name);
+    slogan.setValue(property.slogan);
+    description.setValue(property.description);
+    price.setValue(property.price);
+    beds.setValue(property.beds);
+    area.setValue(property.area);
+    propertyType.setValue(property.type);
+    address.setValue(property.location.address);
+    locDescription.setValue(property.location.description);
+    longitute.setValue(property.location.coordinates[0]);
+    latitute.setValue(property.location.coordinates[1]);
+    sale.setValue(property.forSale);
+    rent.setValue(property.forRent);
+    if (property.features.length !== 0) {
+      feature_1.setValue(property.features[0] ? property.features[0] : "");
+      feature_2.setValue(property.features[1] ? property.features[1] : "");
+      feature_3.setValue(property.features[2] ? property.features[2] : "");
+      feature_4.setValue(property.features[3] ? property.features[3] : "");
+      feature_5.setValue(property.features[4] ? property.features[4] : "");
+      feature_6.setValue(property.features[5] ? property.features[5] : "");
+    }
+    let tempImages = [];
+    for (let i = 0; i < property.images.length; i++) {
+      let path = url + property.images[i];
+      tempImages.push(path);
+    }
+    setImages(tempImages);
+  }
+
   return (
     <Container>
       <Header />
       <Wrapper>
-        <Heading>
-          Please fill up the all the necessary details correctly.
-        </Heading>
+        <Heading>Update Property</Heading>
         <Form>
           <ContentWrapper>
             <InputWrapper>
@@ -394,7 +460,7 @@ export default function AddProperty() {
               ))}
             </ImagePreview>
           </ContentWrapper>
-          <Button onClick={submitForm}>Submit Your Property</Button>
+          <Button onClick={submitForm}>Update Your Property</Button>
           <Center>
             {" "}
             <PropagateLoader color={"#0078bd"} loading={loading} size={30} />
@@ -403,9 +469,8 @@ export default function AddProperty() {
           {error && <ErrorMessage>{error}</ErrorMessage>}
           {added && (
             <SuccessMessage>
-              Your property is added to our portal successfully. You can visit
-              your new created property{" "}
-              <Link to={"/property/" + propertyId}>here</Link>
+              Your property is updated successfully. You can visit the updated
+              property <Link to={"/property/" + id}>here</Link>
             </SuccessMessage>
           )}
         </Form>

@@ -5,5 +5,5 @@ export default function useInput(initialState = "") {
   const onChange = (e) => {
     setValue(e.target.value);
   };
-  return { value, onChange };
+  return { value, onChange, setValue };
 }

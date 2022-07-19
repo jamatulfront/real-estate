@@ -1,4 +1,5 @@
 class APIFeatures {
+  //Query is a mongoose query object and  queryString is the req.query obj
   constructor(query, queryString) {
     this.query = query;
     this.queryString = queryString;

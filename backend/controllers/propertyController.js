@@ -1,4 +1,6 @@
 const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
 const Property = require(".././models/propertyModel");
 const catchAsync = require("./../utils/catchAsync");
 const factory = require("./allFactory");
@@ -10,7 +12,7 @@ const multerStorage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = file.mimetype.split("/")[1];
-    cb(null, `property-test-${Date.now()}.${ext}`);
+    cb(null, `property-test-${req.params.propertyId}-${Date.now()}.${ext}`);
   },
 });
 
@@ -59,7 +61,13 @@ exports.uploadMultiplePropertyImages = async (req, res) => {
       imagesPath.push("/images/properties/" + file.filename);
     }
     try {
+      let property = await Property.findById(req.params.propertyId);
+      let prevImgs = property.images;
+      console.log("previous imgs", prevImgs);
+      console.log("uploaded imgs", imagesPath);
       //updating the images of the property
+      imagesPath = [...imagesPath, ...prevImgs];
+      console.log("all images", imagesPath);
       await Property.findByIdAndUpdate(req.params.propertyId, {
         images: imagesPath,
       });
@@ -68,10 +76,29 @@ exports.uploadMultiplePropertyImages = async (req, res) => {
   });
 };
 
+exports.removePropertyImages = async (req, res) => {
+  let imgs = req.body;
+  try {
+    //remove from the file system and database
+    let property = await Property.findById(req.params.propertyId);
+    let filteredImgs = property.images;
+    for (let img of imgs) {
+      fs.unlinkSync(path.join(process.cwd(), "backend", img));
+      filteredImgs = filteredImgs.filter((i) => i !== img);
+    }
+    await Property.findByIdAndUpdate(req.params.propertyId, {
+      images: filteredImgs,
+    });
+    res.status(201).json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 //************************************************************************************************ */
 
 exports.aliasRecentProperties = (req, res, next) => {
-  req.query.limit = "50";
+  req.query.limit = "25";
   req.query.sort = "-createdAt";
   next();
 };

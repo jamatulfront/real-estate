@@ -58,6 +58,7 @@ export default function PropertySearch({ isBuy = true }) {
   const searchProperties = async (e) => {
     setLoading(true);
     if (!searchData) {
+      setLoading(false);
       return;
     }
     try {

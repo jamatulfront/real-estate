@@ -8,7 +8,10 @@ const router = express.Router();
 router
   .route("/upload/:propertyId")
   .post(propertyController.uploadMultiplePropertyImages);
-
+//removingImages
+router
+  .route("/remove/:propertyId")
+  .patch(propertyController.removePropertyImages);
 router
   .route("/recents")
   .get(

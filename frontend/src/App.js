@@ -12,6 +12,8 @@ import PropertyDetails from "./pages/propertyDetails/propertyDetails";
 import SearchResult from "./pages/searchResults/searchResults";
 import Blogs from "./pages/blogs/blogs";
 import AgentProfile from "./pages/agentProfile/agentProfile";
+import UpdateProperty from "./pages/updateProperty/updateProperty";
+import AllProperties from "./pages/allProperties/allProperties";
 function App() {
   return (
     <>
@@ -23,6 +25,11 @@ function App() {
         <Route element={<LoggedInRoutes />}>
           <Route path="profile" element={<Profile />} exact />
           <Route path="profile/update" element={<ProfileUpdate />} exact />
+          <Route
+            path="/properties/update/:id"
+            element={<UpdateProperty />}
+            exact
+          />
           <Route path="/addProperty" element={<AddProperty />} exact />
           <Route path="/agent/:id" element={<AgentProfile />} exact />
         </Route>
@@ -31,11 +38,7 @@ function App() {
         <Route path="/buy" element={<Home />} exact />
         <Route path="/rent" element={<Home isBuy={false} />} exact />
         <Route path="/newHomes" element={<NewHomes />} exact />
-        <Route
-          path="/explores"
-          element={<NewHomes title="Explores Properties -" />}
-          exact
-        />
+        <Route path="/explores" element={<AllProperties />} exact />
         <Route path="/blogs" element={<Blogs />} exact />
         <Route
           path="/property/:propertyId"

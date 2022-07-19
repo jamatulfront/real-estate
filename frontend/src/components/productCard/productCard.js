@@ -3,15 +3,13 @@ import bedUrl from "../../assets/icons/bed.png";
 import squareUrl from "../../assets/icons/square.png";
 import { Link, useNavigate } from "react-router-dom";
 import { url } from "../../config/url";
+import editIconPath from "../../assets/icons/edit.png";
 const Container = styled.div`
   width: 100%;
   cursor: pointer;
   border: 2px solid transparent;
   border-radius: 1rem;
   padding: 2rem;
-  &:hover {
-    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2);
-  }
   position: relative;
 `;
 const Icon = styled.img`
@@ -64,18 +62,27 @@ const RedCircle = styled.div`
   justify-content: center;
   font-size: 1rem;
 `;
-const EditButton = styled(Link)``;
+const EditButton = styled(Link)`
+  img {
+    height: 3rem;
+    width: 3rem;
+  }
+`;
 
 export default function ProductCard({ product, agent }) {
   const navigateTo = useNavigate();
+  const navigateToProperty = () => {
+    if (agent) return;
+    navigateTo("/property/" + product._id);
+  };
   return (
-    <Container onClick={() => navigateTo("/property/" + product._id)}>
+    <Container onClick={() => navigateToProperty()}>
       {!agent && (
         <RedCircle>{product.forSale ? "For Sale" : "For Rent"}</RedCircle>
       )}
       {agent && (
-        <EditButton to={"/properties/" + product._id + "/update"}>
-          Update
+        <EditButton to={"/properties/" + "update/" + product._id}>
+          <img src={editIconPath} alt="Edit" />
         </EditButton>
       )}
 
