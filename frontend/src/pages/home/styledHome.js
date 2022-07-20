@@ -5,6 +5,7 @@ export const Container = styled.div`
 `;
 export const ShowCaseWrapper = styled.div`
   margin-top: 8rem;
+  height: calc(100vh - 16rem);
 `;
 export const Heading = styled.h1`
   font-size: 2.4rem;

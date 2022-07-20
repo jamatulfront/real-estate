@@ -29,6 +29,7 @@ export default function NewHomes({ title = "Fresh Homes For You -" }) {
   let [filterProp, setFilterProp] = useState({ propertyTypes: "all" });
   let [sortProp, setSortProp] = useState({ field: "", order: "asc" });
 
+  // For the animation of the changed page after clicked on the pagination button
   let productsRef = useRef();
   useEffect(() => {
     async function fetchProperties() {

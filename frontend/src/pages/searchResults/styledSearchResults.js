@@ -50,3 +50,20 @@ export const ProductsWrapper = styled.div`
 export const NotFoundImage = styled.img`
   height: 30rem;
 `;
+export const SortWrapper = styled.div`
+  position: absolute;
+  top: 17rem;
+  right: 2rem;
+  @media (max-width: 700px) {
+    top: 16rem;
+  }
+  @media (max-width: 500px) {
+    top: 13rem;
+  }
+`;
+
+export const PaginateWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

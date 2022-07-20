@@ -52,6 +52,7 @@ export const SearchButton = styled.button`
   cursor: pointer;
   @media (max-width: 500px) {
     font-size: 1.3rem;
+    height: 3rem;
     padding: 0.4rem 1rem;
   }
 `;

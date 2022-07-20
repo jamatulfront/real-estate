@@ -279,10 +279,12 @@ export default function PropertyDetails() {
         setProperty(data.data.data);
         setLoading(false);
         setError("");
-        if (user._id === data.data.data.owner._id) {
+        if (user?._id === data.data.data.owner?._id) {
           setCanEdit(true);
         }
+        return;
       } catch (error) {
+        console.log(error);
         setLoading(false);
         setError("Something went wrong on loading property. Please try again.");
       }
