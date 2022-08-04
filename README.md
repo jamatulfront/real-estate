@@ -2,6 +2,8 @@
 # An Real Estate Portal
 
 This project is a simple prototype of a agent based realestate portal. It include's a navigation for the user and a advanced search and filter option to find the best properties based on the user interest.
+
+It's created for learning purpose and is haveily inpired by realestate.au
 ## Demo
 
 The app is live here : https://realstatebd.herokuapp.com/
